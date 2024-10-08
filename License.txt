@@ -1,0 +1,21 @@
+Licenza MIT
+
+Copyright (c) [anno] [nome completo]
+
+Con la presente si concede l'autorizzazione, gratuita, a chiunque ne ottenga una copia
+di questo software e dei file di documentazione associati (il "Software"), per gestire
+nel Software senza restrizioni, compresi senza limitazioni i diritti
+utilizzare, copiare, modificare, unire, pubblicare, distribuire, concedere in sublicenza e/o vendere
+copie del Software e consentire alle persone a cui il Software è destinato
+forniti per farlo, a condizione che siano soddisfatte le seguenti condizioni:
+
+La suddetta nota di copyright e questa nota di autorizzazione devono essere incluse in tutti
+copie o parti sostanziali del Software.
+
+IL SOFTWARE VIENE FORNITO "COSÌ COM'È", SENZA GARANZIA DI ALCUN TIPO, ESPRESSA O
+IMPLICITE, COMPRESE MA NON LIMITATE ALLE GARANZIE DI COMMERCIABILITÀ,
+IDONEITÀ PER UNO SCOPO PARTICOLARE E NON VIOLAZIONE. IN NESSUN CASO IL
+GLI AUTORI O I TITOLARI DEL COPYRIGHT SARANNO RESPONSABILI PER QUALSIASI RECLAMO, DANNO O ALTRO
+RESPONSABILITÀ, SIA IN UN'AZIONE CONTRATTUALE, ILLECITA O ALTRO, DERIVANTE DA,
+FUORI O IN RELAZIONE CON IL SOFTWARE O L'USO O ALTRE OPERAZIONI NEL
+SOFTWARE.
