@@ -5,7 +5,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "operatore")
@@ -15,14 +19,21 @@ public class OperatoreModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotEmpty(message = "L'email è obbligatoria")
+	@Email(message = "Formato email non valido")
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 	
+	@NotEmpty(message = "La password è obbligatoria")
 	@Column(name = "password", nullable = false)
 	private String password;
 	
 	@Column(name = "stato_personale", nullable = false)
-	private boolean stato_personale;
+	private boolean statoPersonale = true;
+	
+	 @ManyToOne
+	 @JoinColumn(name = "admin_id", nullable = true)  //ho messo true per semplificare l'insorgenza di errori, e non doverlo includere nel form per ora.
+	 private AdminModel admin;
 
 	public Integer getId() {
 		return id;
@@ -48,12 +59,12 @@ public class OperatoreModel {
 		this.password = password;
 	}
 
-	public boolean isStato_personale() {
-		return stato_personale;
+	public boolean isStatoPersonale() {
+		return statoPersonale;
 	}
 
-	public void setStato_personale(boolean stato_personale) {
-		this.stato_personale = stato_personale;
+	public void setStatoPersonale(boolean statoPersonale) {
+		this.statoPersonale = statoPersonale;
 	}
 	
 	

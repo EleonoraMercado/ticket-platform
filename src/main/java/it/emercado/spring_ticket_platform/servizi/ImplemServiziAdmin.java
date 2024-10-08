@@ -1,6 +1,7 @@
 package it.emercado.spring_ticket_platform.servizi;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import it.emercado.spring_ticket_platform.model.AdminModel;
@@ -18,6 +19,10 @@ public class ImplemServiziAdmin implements GestioneServiziAdmin {
 	@Autowired
 	private OperatoreRepository operatoreRepository;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	
 	@Override
 	public AdminModel trovaAdminPerEmail(String email) {
 		return adminRepository.findByEmail(email);
@@ -27,8 +32,8 @@ public class ImplemServiziAdmin implements GestioneServiziAdmin {
 	public OperatoreModel creaNuovoOperatore(String email, String password) {
 		OperatoreModel nuovoOperatore = new OperatoreModel();
 		nuovoOperatore.setEmail(email);
-		nuovoOperatore.setPassword(password);
-		
+		nuovoOperatore.setPassword(passwordEncoder.encode(password));
+		 nuovoOperatore.setStatoPersonale(true);
 		return operatoreRepository.save(nuovoOperatore);
 	}
 	

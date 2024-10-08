@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestione Operatori</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="mb-4">Gestione degli Operatori</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Stato</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="operatore : ${operatori}">
+                    <td th:text="${operatore.id}"></td>
+                    <td th:text="${operatore.email}"></td>
+                    <td>
+						<span th:if="${operatore.statoPersonale}" class="badge bg-success">Attivo</span>
+						<span th:if="${!operatore.statoPersonale}" class="badge bg-danger">Inattivo</span>
+					</td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <form th:action="@{'/admin/operatore/attiva'}" method="post" class="d-inline-block" onsubmit="return confirm('Confermi di voler attivare questo operatore?');">
+                                <input type="hidden" name="email" th:value="${operatore.email}">
+                                <button type="submit" class="btn btn-success">Attiva</button>
+                            </form>
+                            <form th:action="@{'/admin/operatore/disattiva'}" method="post" class="d-inline-block" onsubmit="return confirm('Confermi di voler disattivare questo operatore?');">
+                                <input type="hidden" name="email" th:value="${operatore.email}">
+                                <button type="submit" class="btn btn-danger">Disattiva</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+		<div class="d-flex justify-content-between">
+            <a href="/admin/creaOperatore" class="btn btn-primary">Crea Nuovo Operatore</a>
+            <a href="/admin/home" class="btn btn-secondary">Torna alla Dashboard</a>
+        </div>
+    </div>
+    <script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
+

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifica Ticket</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+</head>
+<body class="bg-primary text-dark bg-opacity-50 d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Modifica Ticket</h2>
+        <div class="card w-75 mx-auto">
+            <div class="card-body">
+                <form th:action="@{'/admin/ticket/' + ${ticket.id} + '/inviaModifica'}" th:object="${ticket}" method="post">
+					<input type="hidden" th:field="*{id}" />					
+					<div class="mb-3">
+					    <label for="operatore" class="form-label">Operatore</label>
+					    <select th:field="*{operatore}" class="form-select" id="operatore" required>
+					        <option th:each="operatore : ${operatori}" th:value="${operatore.id}" th:text="${operatore.email}">Seleziona un operatore</option>
+					    </select>
+					    <div th:if="${#fields.hasErrors('operatore')}" class="text-danger">
+					        <p th:errors="*{operatore}">Operatore Error</p>
+					    </div>
+					</div>
+					
+					<div class="mb-3">
+                        <label for="titolo" class="form-label">Titolo</label>
+                        <input type="text" th:field="*{titolo}" class="form-control" id="titolo" placeholder="Modifica il titolo del ticket" required>
+                        <div th:if="${#fields.hasErrors('titolo')}" class="text-danger">
+                            <p th:errors="*{titolo}">Titolo Error</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="descrizione" class="form-label">Descrizione</label>
+                        <textarea th:field="*{descrizione}" class="form-control" id="descrizione" rows="4" placeholder="Modifica la descrizione del problema o della richiesta" required></textarea>
+                        <div th:if="${#fields.hasErrors('descrizione')}" class="text-danger">
+                            <p th:errors="*{descrizione}">Descrizione Error</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Categoria</label>
+                        <select th:field="*{categoria}" class="form-select" id="categoria" required>
+                            <option th:each="categoria : ${categorie}" th:value="${categoria.id}" th:text="${categoria.nome}">Seleziona una categoria</option>
+                        </select>
+                        <div th:if="${#fields.hasErrors('categoria')}" class="text-danger">
+                            <p th:errors="*{categoria}">Categoria Error</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="stato" class="form-label">Stato</label>
+                        <select th:field="*{stato}" class="form-select" id="stato" required>
+                            <option th:value="DA_FARE" th:text="DA_FARE">DA FARE</option>
+                            <option th:value="IN_CORSO" th:text="IN_CORSO">IN CORSO</option>
+                            <option th:value="COMPLETATO" th:text="COMPLETATO">COMPLETATO</option>
+                            <option th:value="ANNULLATO" th:text="ANNULLATO">ANNULLATO</option>
+                        </select>
+                        <div th:if="${#fields.hasErrors('stato')}" class="text-danger">
+                            <p th:errors="*{stato}">Stato Error</p>
+                        </div>
+                    </div>
+					
+					
+					<div class="d-flex justify-content-between">
+					    <button type="submit" class="btn btn-primary w-50 me-2">Salva Modifiche</button>
+					    <a th:href="@{/admin/adminTicketList}" class="btn btn-secondary w-50">Annulla</a>
+					</div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html> 

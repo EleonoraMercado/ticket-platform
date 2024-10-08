@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestione Categorie</title>
+    <link th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Gestione delle Categorie</h1>
+
+    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#creaCategoriaModal">
+        Crea Nuova Categoria
+    </button>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome Categoria</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="categoria : ${categorie}">
+                <td th:text="${categoria.id}"></td>
+                <td th:text="${categoria.nome}"></td>
+                <td>
+                    
+                    <form th:action="@{/admin/categorie/elimina}" method="post" style="display:inline;">
+                        <input type="hidden" name="categoriaId" th:value="${categoria.id}"/>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Sei sicuro di voler eliminare questo ticket?');">Elimina</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+	<a href="/admin/home" class="btn btn-secondary">Torna alla dashboard</a>
+</div>
+
+<!-- Modale per creare la categoria -->
+<div class="modal fade" id="creaCategoriaModal" tabindex="-1" aria-labelledby="creaCategoriaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form th:action="@{/admin/categorie/crea}" th:object="${categoria}" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="creaCategoriaModalLabel">Crea Nuova Categoria</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome Categoria</label>
+                        <input type="text" class="form-control" id="nome" name="nome" th:field="*{nome}" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                    <button type="submit" class="btn btn-primary">Salva Categoria</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>
+

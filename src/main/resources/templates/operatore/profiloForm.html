@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilo Operatore</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="mb-4">Profilo Operatore</h1>
+
+        <form th:action="@{/operatore/profilo/update}" method="post">
+            <div class="form-group mb-3">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" th:value="${operatore.email}" readonly class="form-control" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" th:value="${operatore.password}" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label>Stato Personale</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="stato" id="statoAttivo" value="true" th:checked="${operatore.statoPersonale == true}">
+                    <label class="form-check-label" for="statoAttivo">Attivo</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="stato" id="statoNonAttivo" value="false" th:checked="${operatore.statoPersonale == false}">
+                    <label class="form-check-label" for="statoNonAttivo">Non Attivo</label>
+                </div>
+            </div>
+
+            <div class="form-group d-flex justify-content-end mt-4">
+                <button type="submit" class="btn btn-primary me-2">Salva</button>
+                <a href="/operatore/dashboardOperatore" class="btn btn-secondary">Torna alla dashboard</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

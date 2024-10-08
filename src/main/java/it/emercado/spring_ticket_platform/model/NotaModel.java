@@ -31,6 +31,10 @@ public class NotaModel {
 	
 	@Column(name = "data_creazione", nullable = false)
 	private LocalDateTime data_creazione;
+	
+	@ManyToOne
+    @JoinColumn(name = "admin_id")
+    private AdminModel admin;
 
 	public Integer getId() {
 		return id;

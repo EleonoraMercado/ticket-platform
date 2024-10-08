@@ -15,7 +15,7 @@ public class ImplemServizioTicket implements ServizioTicket {
 	private TicketRepository ticketRepository;
 	
 	@Override
-	public void aggiornaStatoTicket(int id, StatoTicket nuovoStato) {
+	public void aggiornaStatoTicket(Integer id, StatoTicket nuovoStato) {
 		TicketModel ticket = ticketRepository.findById(id).orElseThrow(() -> new RuntimeException("Ticket non trovato nella lista"));
 		
 		GestioneStatoTicket gestioneStato = new GestioneStatoTicket(ticket.getStato());
@@ -26,7 +26,18 @@ public class ImplemServizioTicket implements ServizioTicket {
 	
 	
 	@Override
-	public TicketModel recuperaTicket(int id) {
+	public TicketModel recuperaTicket(Integer id) {
 		return ticketRepository.findById(id).orElseThrow(() -> new RuntimeException("Ticket non trovato"));
+		
+	}
+	
+	@Override
+    public void eliminaTicket(Integer id) {
+        ticketRepository.deleteById(id);
+    }
+	
+	@Override
+	public void salvaTicket(TicketModel ticket) {
+	    ticketRepository.save(ticket);
 	}
 }

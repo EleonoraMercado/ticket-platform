@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettagli Ticket Operatore</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+</head>
+<body class="bg-success text-dark bg-opacity-50 d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
+    <div class="container mt-5">
+        <h1>Dettagli del Ticket</h1>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Titolo: <span th:text="${ticket.titolo}"></span></h5>
+                <p class="card-text">Descrizione: <span th:text="${ticket.descrizione}"></span></p>
+                <p class="card-text">Stato: <span th:text="${ticket.stato}"></span></p>
+                <p class="card-text">Operatore Assegnato: <span th:text="${ticket.operatore.email}"></span></p>
+                <p class="card-text">Data Creazione: <span th:text="${ticket.data_creazione}"></span></p>
+                <p class="card-text">Ultima Modifica: <span th:text="${ticket.data_ultima_modifica}"></span></p>
+                
+                <button type="button" class="btn btn-warning mt-3" data-bs-toggle="modal" data-bs-target="#modificaStatoModal">
+                    Modifica Stato
+                </button>
+
+                <a th:href="@{'/operatore/ticket/' + ${ticket.id} + '/nuovaNota'}" class="btn btn-success mt-3">
+                    Aggiungi Nota
+                </a>
+
+                <a th:href="@{'/operatore/ticket/' + ${ticket.id} + '/note'}" th:if="${ticket.note.size() > 0}" class="btn btn-info mt-3">
+                    Vedi Note
+                    <span class="badge bg-secondary" th:text="${ticket.note.size()}"></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="d-inline-flex gap-2 mt-4">
+            <a th:href="@{'/operatore/operatoreTicketList'}" class="btn btn-secondary">Torna alla lista</a>
+            <a th:href="@{'/operatore/dashboardOperatore'}" class="btn btn-secondary">Torna alla dashboard</a>
+        </div>
+    </div>
+
+    <!-- modale per la modifica dello stato -->
+    <div class="modal fade" id="modificaStatoModal" tabindex="-1" aria-labelledby="modificaStatoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modificaStatoModalLabel">Modifica Stato del Ticket</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{'/operatore/ticket/' + ${ticket.id} + '/aggiornaStato'}" method="post">
+                        <div class="mb-3">
+                            <label for="nuovoStato" class="form-label">Nuovo Stato</label>
+                            <select class="form-select" id="nuovoStato" name="nuovoStato" required>
+                                <option th:value="DA_FARE" th:text="'Da Fare'"></option>
+                                <option th:value="IN_CORSO" th:text="'In Corso'"></option>
+                                <option th:value="COMPLETATO" th:text="'Completato'"></option>
+								<option th:value="ANNULLATO" th:text="'Annullato'"></option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Salva Modifiche</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

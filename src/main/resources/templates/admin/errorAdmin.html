@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+
+    <title>Errore - Admin</title>
+</head>
+
+<body class="bg-light text-dark d-flex justify-content-center align-items-center" style="height: 100vh;">
+
+    <div class="container text-center">
+		
+        <h1 class="display-4 text-primary">Errore nella Dashboard Admin</h1>
+        
+        <p class="lead text-dark" th:text="${error}">Spiacenti, si è verificato un errore durante l'elaborazione della tua richiesta.</p>
+        
+        <a th:href="@{/admin/dashboardAdmin}" class="btn btn-primary mt-4">Ricarica Dashboard</a>
+    </div>
+
+  
+    <script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

@@ -1,10 +1,13 @@
 package it.emercado.spring_ticket_platform.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -28,12 +31,25 @@ public class AdminModel {
 	
 	@NotBlank(message = "La password non può essere vuota")
 	@Size(min = 8, message = "La password deve contenere almeno 6 caratteri")
+	//da riprendere in un secondo momento
 	@Pattern(
 			regexp = "\n"
 					+ "  ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$\n"
 					+ "", message = "La password deve contenere una cifra da 1 a 9, una lettera minuscola, una lettera maiuscola, un carattere speciale, nessuno spazio e deve essere lunga da 8 a 16 caratteri.")
 	@Column(name = "password", nullable = false)
 	private String password;
+	
+	@OneToMany(mappedBy = "admin")
+    private List<TicketModel> tickets;
+	
+	@OneToMany(mappedBy = "admin")
+    private List<OperatoreModel> operatori;
+	
+	@OneToMany(mappedBy = "admin")
+    private List<NotaModel> nota;
+	
+	@OneToMany(mappedBy = "admin")
+    private List<CategoriaModel> categoria;
 
 	public Integer getId() {
 		return id;

@@ -14,6 +14,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "ticket")
@@ -23,9 +25,11 @@ public class TicketModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotNull
 	@Column(name = "titolo", nullable = false)
 	private String titolo;
 	
+	@NotEmpty
 	@Column(name = "descrizione", nullable = false, length = 700)
 	private String descrizione;
 	
@@ -47,8 +51,13 @@ public class TicketModel {
 	@Column(nullable = false)
 	private LocalDateTime data_creazione;
 	
-	@Column(nullable =false)
-	private LocalDateTime data_ultimaModifica;
+	@Column(name = "data_ultimaModifica", nullable =false)
+	private LocalDateTime data_ultima_modifica;
+	
+	 @ManyToOne
+	    @JoinColumn(name = "admin_id")
+	    private AdminModel admin;
+	 
 
 	public Integer getId() {
 		return id;
@@ -114,15 +123,16 @@ public class TicketModel {
 		this.data_creazione = data_creazione;
 	}
 
-	public LocalDateTime getData_ultimaModifica() {
-		return data_ultimaModifica;
+	public LocalDateTime getData_ultima_modifica() {
+		return data_ultima_modifica;
 	}
 
-	public void setData_ultimaModifica(LocalDateTime data_ultimaModifica) {
-		this.data_ultimaModifica = data_ultimaModifica;
+	public void setData_ultima_modifica(LocalDateTime data_ultimaModifica) {
+		this.data_ultima_modifica = data_ultimaModifica;
 	}
 
 	
 	
+
 	
 }

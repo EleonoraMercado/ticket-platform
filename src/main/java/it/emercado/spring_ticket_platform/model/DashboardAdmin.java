@@ -2,12 +2,14 @@ package it.emercado.spring_ticket_platform.model;
 
 import java.util.List;
 
-public class DashboardModel {
+public class DashboardAdmin {
 
 	private List<TicketModel> ticket;
 	private List<OperatoreModel> operatore;
 	private int totaleTicket;
 	private int totaleOperatori;
+	
+	
 	public List<TicketModel> getTicket() {
 		return ticket;
 	}
