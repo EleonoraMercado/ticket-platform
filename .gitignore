@@ -10,6 +10,9 @@ target/
 # Ignora il file di configurazione di Spring Boot
 /src/main/resources/application.properties
 
+# Ignora i file .DS_Store di macOS
+.DS_Store
+
 
 ### STS ###
 .apt_generated
