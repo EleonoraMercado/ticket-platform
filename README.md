@@ -136,5 +136,5 @@ Questo progetto è distribuito sotto la **Licenza MIT**. Vedi il file [LICENSE](
 
 ---
 
-## 🔐 Pagina di Login
+## 🔐 👥 Pagina di Login
 <img src="src/main/resources/static/screenshot/paginaLogin_standard.png" alt="Pagina di Login" width="800"/>
