@@ -26,14 +26,15 @@ public class SecurityConfiguration {
 	        		"/admin/ticket/modifica/{id}", 
 	        		"/admin/ticketDettaglio/{id}", 
 	        		"/admin/creaCategoria", 
-	        		"/admin/categorie/crea", 
+	        		"/admin/categorie/crea",
 	        		"/admin/operatori", 
 	        		"/admin/listaNote", 
 	        		"/admin/ticket/creaTicket").hasAuthority("admin")
 	        .requestMatchers(HttpMethod.POST,"/admin/salvaOperatore",
 	        		"/admin/ticket/{id}/inviaModifica",
 	        		"/admin/ticket/{id}/aggiungiNota",
-	        		"/admin/ticket/salvaTicket").hasAuthority("admin")
+	        		"/admin/ticket/salvaTicket",
+	        		 "/admin/categorie/elimina/{id}").hasAuthority("admin")
 	        
 	        // Rotte per gli operatori
 	        .requestMatchers(HttpMethod.GET,

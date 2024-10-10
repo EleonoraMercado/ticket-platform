@@ -123,7 +123,8 @@ public class AdminController {
      
         TicketModel ticket = servizioTicket.recuperaTicket(id);
         
-        List<CategoriaModel> categorie = categoriaService.getAllCategorie();
+        List<CategoriaModel> categorie = categoriaService.trovaTutteLeCategorie();
+
         
         List<OperatoreModel> operatori = operatoreRepository.findAll();
         
@@ -177,12 +178,22 @@ public class AdminController {
 	@PostMapping("/categorie/crea")
 	public String creaCategoria(@Valid @ModelAttribute("categoria") CategoriaModel categoriaModel, 
 	       BindingResult bindingResult, Model model) {
-	    if (bindingResult.hasErrors()) {
+	    
+		if (bindingResult.hasErrors()) {
 	        return "admin/categorieList";  
 	    }
 	    categoriaRepository.save(categoriaModel);
-	    return "redirect:/admin/categorie";  
+	    return "redirect:/admin/categorie"; 
+	    
 	}
+	
+	// Elimina una categoria
+	@PostMapping("/categorie/elimina/{id}")
+	public String eliminaCategoria(@PathVariable("id") Integer id) {
+	    categoriaService.eliminaCategoriaPerId(id);
+	    return "redirect:/admin/categorie";
+	}
+
 
 	
 	// per creare nuovo ticket

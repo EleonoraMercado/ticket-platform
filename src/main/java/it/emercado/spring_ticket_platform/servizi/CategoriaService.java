@@ -13,23 +13,23 @@ public class CategoriaService {
     private CategoriaRepository categoriaRepository;
 
     // Recupera tutte le categorie
-    public List<CategoriaModel> getAllCategorie() {
+    public List<CategoriaModel> trovaTutteLeCategorie() {
         return categoriaRepository.findAll();
     }
 
-    // Recupera una categoria 
-    public CategoriaModel getCategoriaById(Integer id) {
+    // Recupera una categoria devo ancora creare la barra di ricerca
+    /*public CategoriaModel trovaCategoriaPerId(Integer id) {
         return categoriaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Categoria non trovata con ID: " + id));
-    }
+    }*/
 
     // Crea o aggiorna una categoria
-    public CategoriaModel saveOrUpdateCategoria(CategoriaModel categoria) {
+    public CategoriaModel salvaCategoria(CategoriaModel categoria) {
         return categoriaRepository.save(categoria);
     }
 
     // Elimina una categoria 
-    public void deleteCategoriaById(Integer id) {
+    public void eliminaCategoriaPerId(Integer id) {
         categoriaRepository.deleteById(id);
     }
 }

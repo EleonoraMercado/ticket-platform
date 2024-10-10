@@ -36,7 +36,7 @@
                 <td th:text="${categoria.nome}"></td>
                 <td>
                     
-                    <form th:action="@{/admin/categorie/elimina}" method="post" style="display:inline;">
+                    <form th:action="@{'/admin/categorie/elimina/' + ${categoria.id}}" method="post" style="display:inline;">
                         <input type="hidden" name="categoriaId" th:value="${categoria.id}"/>
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Sei sicuro di voler eliminare questo ticket?');">Elimina</button>
                     </form>
