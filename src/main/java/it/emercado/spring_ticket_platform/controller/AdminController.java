@@ -1,5 +1,6 @@
 package it.emercado.spring_ticket_platform.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,6 +153,9 @@ public class AdminController {
 	    ticketDaModificare.setCategoria(ticketModel.getCategoria());
 	    ticketDaModificare.setStato(ticketModel.getStato());
 	    
+	    //*ragionamento in salva ticket
+	    ticketDaModificare.setData_ultima_modifica(LocalDateTime.now());
+	    
 	    servizioTicket.salvaTicket(ticketDaModificare);
 	    
 	    return "redirect:/admin/ticket/vedi/" + id; 
@@ -216,6 +220,13 @@ public class AdminController {
 			
 			return "/admin/createTicket";
 		}
+		
+		//aggiunti perche nel dettaflio del ticket vista operatore passano solo nel primo ticket.
+		//ma non funzionano, rivedere come fare*
+	    ticketModel.setData_creazione(LocalDateTime.now());
+	    ticketModel.setData_ultima_modifica(LocalDateTime.now());
+
+		
 		ticketRepository.save(ticketModel);
 		
 		return "redirect:/admin/adminTicketList";
